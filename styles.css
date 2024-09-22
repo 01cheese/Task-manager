@@ -1,100 +1,278 @@
-/* Основные стили */
-* {
+/* Общие стили */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #f4f4f4;
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 
-.container {
-    background-color: white;
+/* Сайдбар */
+.sidebar {
+    width: 250px;
+    background-color: #2e3a59;
+    color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 100%;
 }
 
-/* Темная тема */
-body.dark-mode {
-    background-color: #333;
-    color: #f4f4f4;
+.sidebar h2 {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
 }
 
-body.dark-mode .container {
-    background-color: #444;
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
 }
 
-/* Стиль кнопок */
+.sidebar nav ul li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    color: #9aa3b9;
+}
+
+/* Основная часть */
+.layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.content {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+}
+
 button {
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
+    border-radius: 8px;
     background-color: #5cb85c;
     color: white;
-    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+button i {
+    margin-right: 8px;
 }
 
 button:hover {
     background-color: #4cae4c;
 }
 
-/* Фильтры и формы */
-form, #filters {
+/* Модальное окно */
+.modal {
+    display: none; /* По умолчанию скрыто */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Темная тема */
+body.dark-mode {
+    background-color: #333;
+}
+
+body.dark-mode .content {
+    background-color: #444;
+    color: white;
+}
+
+body.dark-mode th {
+    background-color: #555;
+}
+
+/* Панель действий */
+.action-panel {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-input, textarea, select {
-    margin-bottom: 10px;
+.bulk-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bulk-actions label {
+    font-size: 1rem;
+}
+
+.bulk-delete {
+    background-color: #dc3545;
+}
+
+.bulk-delete:hover {
+    background-color: #c82333;
+}
+
+/* Фильтры */
+.filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filters input, .filters select {
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid #ccc;
+    flex: 1;
 }
 
-#filters {
-    margin-bottom: 20px;
+.filters button {
+    background-color: #007bff;
+}
+
+.filters button:hover {
+    background-color: #0056b3;
+}
+
+/* Таблица задач */
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.task-table th, .task-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.task-table th {
+    background-color: #f8f9fa;
+}
+
+.task-table tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+.task-table td .actions {
     display: flex;
     gap: 10px;
 }
 
-/* Список задач */
-ul {
-    list-style-type: none;
+button.complete {
+    background-color: #28a745;
 }
 
-li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+button.complete:hover {
+    background-color: #218838;
 }
 
-.completed {
-    text-decoration: line-through;
-    color: #888;
+button.delete {
+    background-color: #dc3545;
 }
 
-li button {
-    background-color: #d9534f;
-    border: none;
+button.delete:hover {
+    background-color: #c82333;
+}
+
+/* Статусные индикаторы */
+.status-completed {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+/* Темная тема */
+body.dark-mode {
+    background-color: #333;
+}
+
+body.dark-mode .content {
+    background-color: #444;
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
-li button:hover {
-    background-color: #c9302c;
+body.dark-mode th {
+    background-color: #555;
 }
 
+/* Адаптивные стили для мобильных */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .task-table th, .task-table td {
+        padding: 10px;
+    }
+
+    .bulk-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
