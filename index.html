@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Manager</h1>
+            <div class="theme-switcher">
+                <button id="darkModeToggle">Toggle Dark Mode</button>
+            </div>
+        </header>
+
+        <form id="taskForm">
+            <input type="text" id="taskName" placeholder="Task Name" required>
+            <textarea id="taskDescription" placeholder="Task Description"></textarea>
+            <input type="date" id="taskDueDate" required>
+
+            <select id="taskCategory" required>
+                <option value="">Select Category</option>
+                <option value="Work">Work</option>
+                <option value="Home">Home</option>
+                <option value="Personal">Personal</option>
+            </select>
+
+            <select id="taskPriority" required>
+                <option value="">Select Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <label for="taskRepeating">
+                <input type="checkbox" id="taskRepeating"> Repeating Task
+            </label>
+
+            <label for="taskFavorite">
+                <input type="checkbox" id="taskFavorite"> Favorite Task
+            </label>
+
+            <button type="submit">Add Task</button>
+        </form>
+
+        <h2>Task List</h2>
+        <div id="filters">
+            <input type="text" id="searchBar" placeholder="Search tasks...">
+            <select id="filterCategory">
+                <option value="">Filter by Category</option>
+                <option value="Work">Work</option>
+                <option value="Home">Home</option>
+                <option value="Personal">Personal</option>
+            </select>
+
+            <select id="filterPriority">
+                <option value="">Filter by Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <select id="filterStatus">
+                <option value="">Filter by Status</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
+
+        <ul id="taskList"></ul>
+        <button id="exportTasks">Export Tasks</button>
+        <input type="file" id="importTasksFile" style="display: none;" />
+        <button id="importTasks">Import Tasks</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
