@@ -117,10 +117,13 @@ function displayTasks() {
                     <td>${task[3]}</td>
                     <td class="${statusClass}">${task[4]}</td>
                     <td>${task[5]}</td>
+                    <!-- Add Edit button next to each task in the table -->
                     <td>
+                        <button onclick="editTask(${task[0]})" class="edit">Edit</button>
                         <button onclick="completeTask(${task[0]})" class="complete">Complete</button>
                         <button onclick="deleteTask(${task[0]})" class="delete">Delete</button>
                     </td>
+
                 `;
                 taskList.appendChild(row);
             }
@@ -151,6 +154,99 @@ function completeTask(id) {
         showNotification("Failed to complete task.", true);
     });
 }
+// Open edit modal and populate it with the task data
+function editTask(id) {
+    fetch(`/get_tasks`)
+    .then(response => response.json())
+    .then(tasks => {
+        const task = tasks.find(t => t[0] === id); // Find task by id
+        if (task) {
+            document.getElementById("editTaskName").value = task[1];
+            document.getElementById("editTaskCategory").value = task[2];
+            document.getElementById("editTaskPriority").value = task[3];
+            document.getElementById("editTaskDueDate").value = task[5];
+            document.getElementById("editTaskId").value = task[0];
+            document.getElementById("editTaskModal").style.display = "block"; // Show modal
+        }
+    });
+}
+
+// Close edit modal
+document.getElementById("closeEditModal").onclick = function() {
+    document.getElementById("editTaskModal").style.display = "none";
+}
+
+
+// Функция для получения данных с сервера и обновления графиков
+function updateDashboard() {
+    fetch('/dashboard_data')
+        .then(response => response.json())
+        .then(data => {
+            // Обновляем данные для графиков
+            const categories = data.categories.map(item => item[0]);
+            const categoryCounts = data.categories.map(item => item[1]);
+
+            const statuses = data.statuses.map(item => item[0]);
+            const statusCounts = data.statuses.map(item => item[1]);
+
+            const priorities = data.priorities.map(item => item[0]);
+            const priorityCounts = data.priorities.map(item => item[1]);
+
+            // Обновляем столбчатую диаграмму для категорий
+            categoryChart.data.labels = categories;
+            categoryChart.data.datasets[0].data = categoryCounts;
+            categoryChart.update();
+
+            // Обновляем круговую диаграмму для статусов задач
+            statusChart.data.labels = statuses;
+            statusChart.data.datasets[0].data = statusCounts;
+            statusChart.update();
+
+            // Обновляем диаграмму для приоритетов
+            priorityChart.data.labels = priorities;
+            priorityChart.data.datasets[0].data = priorityCounts;
+            priorityChart.update();
+        })
+        .catch(error => console.error('Error fetching dashboard data:', error));
+}
+
+// Запуск обновления дашборда при загрузке страницы
+window.onload = function() {
+    updateDashboard();
+};
+
+
+
+// Save changes to task
+document.getElementById("editTaskBtn").addEventListener("click", function() {
+    let taskId = document.getElementById("editTaskId").value;
+    let taskName = document.getElementById("editTaskName").value;
+    let taskCategory = document.getElementById("editTaskCategory").value;
+    let taskPriority = document.getElementById("editTaskPriority").value;
+    let taskDueDate = document.getElementById("editTaskDueDate").value;
+
+    let formData = new FormData();
+    formData.append('task_name', taskName);
+    formData.append('category', taskCategory);
+    formData.append('priority', taskPriority);
+    formData.append('due_date', taskDueDate);
+    formData.append('status', 'pending'); // Or fetch the current status if needed
+
+    fetch(`/update_task/${taskId}`, {
+        method: 'POST',
+        body: formData
+    }).then(response => {
+        if (response.ok) {
+            displayTasks();
+            document.getElementById("editTaskModal").style.display = "none";
+            showNotification("Task updated successfully!");
+        } else {
+            showNotification("Failed to update task.", true);
+        }
+    }).catch(() => {
+        showNotification("Failed to update task.", true);
+    });
+});
 
 // Удаление задачи
 function deleteTask(id) {

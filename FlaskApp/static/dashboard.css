@@ -1,0 +1,139 @@
+/* Общие стили для страницы дашборда */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1e1e2d; /* Темный фон */
+    color: #fff; /* Белый текст */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #fff; /* Белый заголовок */
+    margin-bottom: 40px;
+}
+
+
+/* Сайдбар */
+.sidebar {
+    margin: auto;
+    background-color: #2e3a59;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    display: ruby;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    color: #9aa3b9;
+}
+
+.layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* Контейнер для графиков */
+.container {
+    display: flex; /* Горизонтальное расположение графиков */
+    justify-content: space-between;
+    flex-wrap: wrap; /* Для более гибкого расположения на разных экранах */
+    width: 100%;
+    max-width: 1200px;
+    background-color: #252535; /* Темный цвет контейнера */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Индивидуальный контейнер для каждого графика */
+.chart-container {
+    flex: 1 1 30%; /* Автоматическое изменение размера контейнера для графика */
+    margin: 10px;
+    padding: 20px;
+    background-color: #333344; /* Темные блоки для каждого графика */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для графиков */
+canvas {
+    display: block;
+    width: 100%;
+    height: 200px; /* Небольшие графики */
+}
+
+.chart-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #fff; /* Белый текст */
+}
+
+/* Темная тема для графиков */
+.bar-background-color {
+    background-color: rgba(75, 192, 192, 0.6);
+    border-color: rgba(75, 192, 192, 1);
+}
+
+.pie-background-color {
+    background-color: rgba(255, 99, 132, 0.6);
+    border-color: rgba(255, 99, 132, 1);
+}
+
+/* Адаптивные стили */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: row; /* Оставляем горизонтальное расположение */
+        flex-wrap: wrap; /* Перенос для узких экранов */
+    }
+
+    .chart-container {
+        flex: 1 1 45%; /* Занимает 45% ширины экрана на средних экранах */
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .chart-container {
+        flex: 1 1 100%; /* Полная ширина на мобильных устройствах */
+    }
+
+    canvas {
+        height: 150px; /* Еще меньше для мобильных устройств */
+    }
+}

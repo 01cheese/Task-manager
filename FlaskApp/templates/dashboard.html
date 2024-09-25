@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../static/script.js"></script>
+    <link rel="stylesheet" href="../static/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="layout">
+        <!-- Сайдбар -->
+        <aside class="sidebar">
+        <h1>Your Tasks Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="index"><i class="fas fa-tasks"></i> Tasks</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+                    <li><a href="#"><i class="fas fa-cogs"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+
+
+        <canvas id="categoryChart" width="400" height="200"></canvas>
+<canvas id="statusChart" width="400" height="200"></canvas>
+<canvas id="priorityChart" width="400" height="200"></canvas>
+    </div>
+
+    <script>
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    const statusCtx = document.getElementById('statusChart').getContext('2d');
+    const priorityCtx = document.getElementById('priorityChart').getContext('2d');
+
+    // Инициализация графиков с пустыми данными
+    const categoryChart = new Chart(categoryCtx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Number of Tasks by Category',
+                data: [],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    const statusChart = new Chart(statusCtx, {
+        type: 'pie',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Task Status',
+                data: [],
+                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 159, 64, 1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    const priorityChart = new Chart(priorityCtx, {
+        type: 'doughnut',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Priority Distribution',
+                data: [],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Обновляем дашборд при загрузке страницы
+    window.onload = function() {
+        updateDashboard();
+    };
+</script>
+</body>
+</html>

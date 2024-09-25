@@ -8,6 +8,10 @@ body {
     height: 100vh;
 }
 
+button {
+    display: inline;
+}
+
 /* Сайдбар */
 .sidebar {
     width: 250px;
@@ -83,7 +87,6 @@ button {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: flex;
     align-items: center;
 }
 
@@ -91,15 +94,16 @@ button i {
     margin-right: 8px;
 }
 
+#darkModeToggle {
+  margin-left: 1050px;
+}
+
 button:hover {
     background-color: #4cae4c;
 }
 
 /* Модальное окно */
-/* ... предыдущие стили ... */
-
-/* Модальное окно */
-.modal {
+.modal{
     display: none; /* По умолчанию скрыто */
     position: fixed;
     z-index: 1000; /* Поверх всего остального */
@@ -153,7 +157,7 @@ button:hover {
 }
 
 /* Форма в модальном окне */
-#taskForm input, #taskForm select {
+#taskForm input, #taskForm select, #editTaskForm {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -308,6 +312,8 @@ body.dark-mode th {
     background-color: #f1f3f5;
 }
 
+
+
 .task-table td .actions {
     display: flex;
     gap: 10px;
@@ -352,6 +358,10 @@ body.dark-mode .content {
 
 body.dark-mode th {
     background-color: #555;
+}
+
+.dark-mode .task-table tr:hover  {
+    background-color: #555555;
 }
 
 /* Адаптивные стили для мобильных */
